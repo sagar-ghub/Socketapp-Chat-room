@@ -31,11 +31,12 @@ io.on("connection",socket=>{
 
         uname=name; 
         
-        socket.join(user.room);
+        
         if(error) return callback(error);
         //just a welcome message
-        socket.emit('message',{user:'admin',text:`${user.name} Welcome to the ${user.room}`})
+        socket.emit('message',{user:'admin',text:`${user.name.toUpperCase()} Welcome to the ${user.room}`})
         
+        socket.join(user.room);
         //Will broadcast everyone except the one who joined currently
         socket.broadcast.to(user.room).emit('message',{user:'admin',text:`${user.name} has joined the chat`})
         
